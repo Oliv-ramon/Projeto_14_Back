@@ -8,6 +8,8 @@ export async function signUp(req, res) {
 
   const hashedPassword = bcrypt.hashSync(user.password, 10);
 
+  console.log(db);
+
   try {
     db.collection("users").insertOne(
       {

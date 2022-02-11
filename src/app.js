@@ -9,5 +9,4 @@ app.use(route);
 
 app.listen(5000, () => {
   console.log("listening on port 5000");
-  console.log("testando_push_tarcísio");
 });
