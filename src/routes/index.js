@@ -7,8 +7,8 @@ import purchaseRouter from "./purchaseRouter.js";
 const route = Router();
 
 route.use(authRouter);
-route.use(cartRouter);
 route.use(productsRouter);
+route.use(cartRouter);
 route.use(purchaseRouter);
 
 
