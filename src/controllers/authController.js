@@ -32,7 +32,7 @@ export async function signIn(req, res) {
   try  {
     db.collection("sessions").insertOne(
       {
-        user: user._id,
+        userId: user._id,
         token
       }
     );
