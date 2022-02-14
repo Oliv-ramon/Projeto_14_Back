@@ -2,7 +2,7 @@ import { cartItemSchema } from "../schemas/index.js";
 
 export default async function cartItemValidation(req, res, next) {
   const cart = req.body;
-
+  
   if (cart.length === 0 ) {
     return res.sendStatus(422);
   }

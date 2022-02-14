@@ -1,44 +1,51 @@
 import db from "../db.js";
 
-export async function saveCart(req, res) {
-  const cart = req.body;
+export async function sendCart(req, res) {
   const userId = res.locals.userId;
 
   try {
-    db.collection("carts").insertOne(
-      {
-        userId,
-        ...cart,
-      }
-    );
-  } catch {
-    return res.sendStatus(500);
-  }
-  
-  res.sendStatus(201);
-}
+    const cartDocument = await db.collection("carts").findtOne({ userId });
 
-export async function deleteCartItem(req, res) {
-  const itemId = req.params.itemId;
-  const userId = res.locals.userId;
+    if (cartDocument) {
+      return res.status(200).send(cartDocument.cart);
+    }
 
-  if (itemId === "all") {
-    db.collection("carts").updateOne({ userId }, {
+    await db.collection("carts").insertOne({
       userId,
       cart: [],
-    })
+    });
+
+    return res.status(200).send([]);
+  } catch {
+    return res.sendStatus(500);
   }
+}
+
+export async function updateCart(req, res) {
+  const userId = res.locals.userId;
+  const cart = req.body;
 
   try {
-    db.collection("carts").insertOne(
-      {
-        userId,
-        ...cart,
-      }
+    const update = await db.collection("carts").updateOne({ userId }, { $set: { cart } }
     );
+    console.log(update)
   } catch {
     return res.sendStatus(500);
   }
   
-  res.sendStatus(201);
+  res.sendStatus(204);
+}
+
+export async function cleanCart(req, res) {
+  const userId = res.locals.userId;
+
+  try {
+    await db.collection("carts").updateOne({ userId }, { 
+      $set: { cart: [] }});
+    
+    return res.status(204).send([]);
+  } catch(error) {
+    console.log(error)
+    return res.sendStatus(500);
+  }
 }

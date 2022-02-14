@@ -8,7 +8,7 @@ export async function savePurchase(req, res) {
     db.collection("purchases").insertOne(
       {
         userId,
-        ...purchase,
+        itemsPurchased: purchase,
       }
     );
   } catch {
