@@ -1,4 +1,4 @@
-import db from "../db.js"
+import db from "../db.js";
 import bcrypt from "bcrypt";
 import { loginSchema } from "../schemas/index.js";
 
