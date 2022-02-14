@@ -8,6 +8,7 @@ const cartItemSchema = joi.object(
     image: joi.string().required(),
     size: joi.string().uppercase().max(2).required(),
     price: joi.number().required(),
+    amount: joi.number().required(),
   }
 )
 
