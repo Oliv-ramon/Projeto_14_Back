@@ -6,5 +6,6 @@ const cartRouter = Router();
 
 cartRouter.use(tokenValidation);
 cartRouter.post("/cart", cartItemsValidation, saveCart);
+cartRouter.delete("/cart/:itemId", deleteCartItem);
 
 export default cartRouter;
