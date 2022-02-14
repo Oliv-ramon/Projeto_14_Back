@@ -4,7 +4,7 @@ export async function sendCart(req, res) {
   const userId = res.locals.userId;
 
   try {
-    const cartDocument = await db.collection("carts").findtOne({ userId });
+    const cartDocument = await db.collection("carts").findOne({ userId });
 
     if (cartDocument) {
       return res.status(200).send(cartDocument.cart);
@@ -16,7 +16,8 @@ export async function sendCart(req, res) {
     });
 
     return res.status(200).send([]);
-  } catch {
+  } catch (error) {
+    console.log(error)
     return res.sendStatus(500);
   }
 }
@@ -26,9 +27,8 @@ export async function updateCart(req, res) {
   const cart = req.body;
 
   try {
-    const update = await db.collection("carts").updateOne({ userId }, { $set: { cart } }
+    await db.collection("carts").updateOne({ userId }, { $set: { cart } }
     );
-    console.log(update)
   } catch {
     return res.sendStatus(500);
   }
