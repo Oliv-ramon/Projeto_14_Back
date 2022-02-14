@@ -7,7 +7,6 @@ export default async function tokenValidation(req, res, next) {
   if (!token) {
     return res.sendStatus(401);
   }
-  console.log(token)
   
   try {
     const session = await db.collection("sessions").findOne({ token });
