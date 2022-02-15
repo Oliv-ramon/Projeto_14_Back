@@ -5,7 +5,7 @@ dotenv.config();
 
 const mongoClient = new MongoClient(process.env.MONGO_URI);
 
-const dbConnection = await mongoClient.connect();
+await mongoClient.connect();
+const db = mongoClient.db("bikers-project");
 
-const db = dbConnection.db("bikers-project");
 export default db;
